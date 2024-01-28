@@ -57,19 +57,26 @@ const TicTacToeHome = () => {
   }, []);
 
   return (
-    <div className="game">
+    <>
+    <header>
+        <h1>Tic Tac Toe</h1>
+    </header>
+    <section className="game">
       <div className="game-board">
         <Board squares={currentSquares} onClick={handleClick} />
       </div>
-      <div className="game-info">
-        <div>{winner ? `Winner: ${winner}` : `Next Player: ${isXNext ? 'X' : 'O'}`}</div>
-        <button onClick={undoLastMove} disabled={stepNumber === 0}>
-          Undo Last Move
-        </button>
-        <button onClick={resetGame}>Reset Game</button>
+      <div className='data-container'>
+        <div className="game-info">
+            <div>{winner ? `Winner: ${winner}` : `Next Player: ${isXNext ? 'X' : 'O'}`}</div>
+            <button onClick={undoLastMove} disabled={stepNumber === 0} aria-label="Undo Last Move">
+                Undo Last Move
+            </button>
+            <button onClick={resetGame} aria-label="Reset Game">Reset Game</button>        
+        </div>
         <GameHistory history={history} jumpTo={jumpTo} />
       </div>
-    </div>
+    </section>
+    </>
   );
 };
 

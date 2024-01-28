@@ -5,14 +5,24 @@ body {
     padding: 0;
     background-color: cadetblue;
   }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
   .game {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 30px;
     gap:20px
+  }
+
+  .data-container {
+    display: flex;
   }
   
   .game-board {
@@ -65,7 +75,7 @@ body {
   /* For screens smaller than 600px (phones) */
   @media (max-width: 600px) {
     .game {
-      margin-top: 20px;
+      margin-top: 10px;
     }
   
     .game-board {
@@ -87,6 +97,11 @@ body {
   
   /* For screens between 600px and 992px (tablets) */
   @media (min-width: 601px) and (max-width: 992px) {
+
+    .game {
+        margin-top: 20px;
+      }
+    
     .square {
       width: 45px;
       height: 45px;
@@ -98,7 +113,7 @@ body {
   /* For screens larger than 992px (desktop) */
   @media (min-width: 993px) {
     .game {
-      margin-top: 50px;
+      margin-top: 30px;
     }
   
     .game-board {
