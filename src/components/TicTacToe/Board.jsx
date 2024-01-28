@@ -1,8 +1,9 @@
 // Board.js
-import React from 'react';
+import React, {memo} from 'react';
 import Square from './Square';
 
-const Board = ({ squares, onClick }) => (
+const Board = ({ squares, onClick }) => {    
+    return (    
   squares.map((row, rowIndex) => (
     <div key={rowIndex} className="board-row">
       {row.map((_, colIndex) => (
@@ -16,5 +17,6 @@ const Board = ({ squares, onClick }) => (
     </div>
   ))
 );
+      }
 
-export default Board;
+export default memo(Board);

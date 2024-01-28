@@ -1,10 +1,11 @@
 /* App.css */
 .game {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 50px;
+    gap:20px
   }
   
   .game-board {
@@ -24,17 +25,21 @@
     font-size: 24px;
     text-align: center;
     line-height: 50px;
-    background: #fff;
+    background: #add8e6; /* Light Blue Background */
     border: 1px solid #ddd;
     cursor: pointer;
+    color: #fff; /* White color for 'X' and 'O' */
   }
   
   .square:hover {
-    background: #f0f0f0;
+    background: #87cefa; /* Lighter Blue on Hover */
   }
   
   .game-info {
-    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;    
+    padding-left: 20px;
   }
   
   .game-info button {
@@ -48,5 +53,9 @@
   .game-info button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  body {
+    background-color: cadetblue;
   }
   

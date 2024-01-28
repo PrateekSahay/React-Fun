@@ -1,5 +1,5 @@
 // App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './styles.css';
 import Board from './Board';
 import GameHistory from './GameHistory';
@@ -22,7 +22,7 @@ const TicTacToeHome = () => {
     }
   }, [winner]);
 
-  const handleClick = (row, col) => {
+  const handleClick = useCallback((row, col) => {
     if (currentSquares[row][col] || winner) {
       return;
     }
@@ -36,25 +36,25 @@ const TicTacToeHome = () => {
     ]);
     setStepNumber((prevStepNumber) => prevStepNumber + 1);
     setIsXNext(!isXNext);
-  };
+  }, [currentSquares, winner, isXNext, stepNumber]);
 
-  const jumpTo = (step) => {
+  const jumpTo = useCallback((step) => {
     setStepNumber(step);
     setIsXNext(step % 2 === 0);
-  };
+  }, []);
 
-  const undoLastMove = () => {
+  const undoLastMove = useCallback(() => {
     if (stepNumber > 0) {
       setStepNumber((prevStepNumber) => prevStepNumber - 1);
       setIsXNext((prevIsXNext) => !prevIsXNext);
     }
-  };
+  }, [stepNumber]);
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     setHistory([{ squares: Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill(null)) }]);
     setStepNumber(0);
     setIsXNext(true);
-  };
+  }, []);
 
   return (
     <div className="game">
