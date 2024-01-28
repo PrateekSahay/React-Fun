@@ -1,5 +1,12 @@
 /* App.css */
-.game {
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: cadetblue;
+  }
+  
+  .game {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,13 +16,11 @@
   }
   
   .game-board {
-    margin-right: 20px;
+    margin-top: 20px;
   }
-  
-  .board-row:after {
-    content: "";
-    display: table;
-    clear: both;
+
+  .board-row {
+    display: flex;
   }
   
   .square {
@@ -25,26 +30,26 @@
     font-size: 24px;
     text-align: center;
     line-height: 50px;
-    background: #add8e6; /* Light Blue Background */
+    background: #add8e6;
     border: 1px solid #ddd;
     cursor: pointer;
-    color: #fff; /* White color for 'X' and 'O' */
+    color: #fff;
   }
   
   .square:hover {
-    background: #87cefa; /* Lighter Blue on Hover */
+    background: #87cefa;
   }
   
   .game-info {
     display: flex;
     flex-direction: column;
-    font-size: 18px;    
-    padding-left: 20px;
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
   }
   
   .game-info button {
     margin-top: 10px;
-    margin-right: 10px;
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
@@ -54,8 +59,50 @@
     cursor: not-allowed;
     opacity: 0.5;
   }
-
-  body {
-    background-color: cadetblue;
+  
+  /* Media Queries for Responsive Design */
+  
+  /* For screens smaller than 600px (phones) */
+  @media (max-width: 600px) {
+    .game {
+      margin-top: 20px;
+    }
+  
+    .game-board {
+      margin-top: 10px;
+    }
+  
+    .square {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      line-height: 40px;
+    }
+  
+    .game-info {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
+  
+  /* For screens between 600px and 992px (tablets) */
+  @media (min-width: 601px) and (max-width: 992px) {
+    .square {
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      line-height: 45px;
+    }
+  }
+  
+  /* For screens larger than 992px (desktop) */
+  @media (min-width: 993px) {
+    .game {
+      margin-top: 50px;
+    }
+  
+    .game-board {
+      margin-top: 20px;
+    }
   }
   
