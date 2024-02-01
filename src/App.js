@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
-import TicTacToeHome from './components/TicTacToe/TicTacToeHome';
+import Bridge from './components/BridgeWeave';
+// import TicTacToeHome from './components/TicTacToe/TicTacToeHome';
 // import RouterHome from './components/Router/RouterHome';
 // import { useState } from 'react';
 // import RecursionFolderHome from './components/RecursionFolder/RecursionFolderHome';
@@ -11,7 +12,7 @@ import TicTacToeHome from './components/TicTacToe/TicTacToeHome';
 function App() {    
   return (
     <div className="App">
-      <TicTacToeHome />
+      <Bridge />
 
     </div>
   );
