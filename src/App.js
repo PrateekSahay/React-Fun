@@ -9,12 +9,13 @@ import './App.css';
 // import ImageSlider from './components/ImageSlider/ImageSlider';
 // import InfiniteScrollHome from './components/InfiniteScroll/InfiniteScrollHome';
 // import MedicalAlertDetectorHome from './components/MedicalAlertDetector/MedicalAlertDetectorHome';
-import LoginSignupHome from './components/LoginSignup/LoginSignupHome';
+// import LoginSignupHome from './components/LoginSignup/LoginSignupHome';
+import TableHeaderSortHome from './components/TableHeaderSort/TableHeaderSortHome';
 
 function App() {    
   return (
     <div className="App">
-      <LoginSignupHome />
+      <TableHeaderSortHome />
 
     </div>
   );
