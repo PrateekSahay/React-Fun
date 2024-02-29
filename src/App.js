@@ -8,12 +8,13 @@ import './App.css';
 // import ProgressBarHome from './components/ProgressBar/ProgressBarHome';
 // import ImageSlider from './components/ImageSlider/ImageSlider';
 // import InfiniteScrollHome from './components/InfiniteScroll/InfiniteScrollHome';
-import MedicalAlertDetectorHome from './components/MedicalAlertDetector/MedicalAlertDetectorHome';
+// import MedicalAlertDetectorHome from './components/MedicalAlertDetector/MedicalAlertDetectorHome';
+import LoginSignupHome from './components/LoginSignup/LoginSignupHome';
 
 function App() {    
   return (
     <div className="App">
-      <MedicalAlertDetectorHome />
+      <LoginSignupHome />
 
     </div>
   );
