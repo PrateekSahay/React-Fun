@@ -11,7 +11,7 @@ import './App.css';
 // import MedicalAlertDetectorHome from './components/MedicalAlertDetector/MedicalAlertDetectorHome';
 // import LoginSignupHome from './components/LoginSignup/LoginSignupHome';
 // import TableHeaderSortHome from './components/TableHeaderSort/TableHeaderSortHome';
-import TimerHome from './components/Timer/TimerHome';
+import TimerHome from './components/MultipleTimer/TimerHome';
 
 function App() {    
   return (
