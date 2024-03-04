@@ -10,12 +10,14 @@ import './App.css';
 // import InfiniteScrollHome from './components/InfiniteScroll/InfiniteScrollHome';
 // import MedicalAlertDetectorHome from './components/MedicalAlertDetector/MedicalAlertDetectorHome';
 // import LoginSignupHome from './components/LoginSignup/LoginSignupHome';
-import TableHeaderSortHome from './components/TableHeaderSort/TableHeaderSortHome';
+// import TableHeaderSortHome from './components/TableHeaderSort/TableHeaderSortHome';
+import TimerHome from './components/Timer/TimerHome';
 
 function App() {    
   return (
     <div className="App">
       <TableHeaderSortHome />
+      <TimerHome />
 
     </div>
   );
