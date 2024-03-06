@@ -55,3 +55,7 @@
 // };
 
 // export default SearchInput;
+
+// passive vs active elements in html
+// controlled vs uncontrolled component in react
+// 
