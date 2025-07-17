@@ -1,0 +1,44 @@
+.App {
+    font-family: sans-serif;
+    width: 400px;
+    margin: auto;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  
+  input {
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  
+  button {
+    margin-right: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .filters {
+    margin-bottom: 1rem;
+  }
+  
+  .todo-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .todo-item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  
