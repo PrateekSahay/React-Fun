@@ -1,0 +1,184 @@
+==============================
+🧵 REACT FIBER - COMPLETE SUMMARY
+==============================
+
+📌 What is React Fiber?
+-----------------------
+- React Fiber is the complete rewrite of React's reconciliation algorithm.
+- Introduced in React 16 (2017).
+- Replaced the older stack-based reconciler.
+- It makes rendering interruptible, resumable, and gives fine-grained control over updates.
+
+==============================
+🔁 Reconciliation: Old vs Fiber
+==============================
+
+➡️ Pre-Fiber (React 15 and earlier):
+- Recursive and synchronous.
+- Entire component tree rendered in one go.
+- Could not pause, prioritize, or resume rendering.
+- Poor error handling (entire app crashed).
+- No support for Suspense, Concurrent features.
+
+➡️ Post-Fiber (React 16+):
+- Introduced Fiber data structure (linked-list tree nodes).
+- Work can be split into units and paused/resumed.
+- Prioritization of updates.
+- Introduced Error Boundaries, Portals, Suspense.
+- Foundation for Concurrent rendering (fully enabled in React 18).
+
+==============================
+📦 What Did React Fiber Introduce?
+==============================
+
+✅ Incremental rendering
+✅ Prioritized updates (Time Slicing)
+✅ Error boundaries
+✅ Portals (render outside DOM hierarchy)
+✅ Suspense and lazy loading
+✅ Double buffering (alternate trees)
+✅ Groundwork for Concurrent Mode (React 18)
+
+==============================
+🧠 What is a Fiber Node?
+==============================
+
+A Fiber is a JS object representing a unit of work.
+
+Each node includes:
+- type (component)
+- child, sibling, return (to form a tree)
+- stateNode (DOM or class instance)
+- alternate (for double buffering)
+
+==============================
+🧨 Error Boundaries
+==============================
+
+Pre-Fiber:
+- Any error crashed the whole app.
+
+Post-Fiber (React 16+):
+- A component can catch render errors from its children and display fallback UI.
+
+Example:
+class ErrorBoundary extends React.Component {
+  state = { hasError: false };
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.log("Caught error:", error);
+  }
+
+  render() {
+    return this.state.hasError ? <h2>Something went wrong.</h2> : this.props.children;
+  }
+}
+
+Usage:
+<ErrorBoundary>
+  <MyComponent />
+</ErrorBoundary>
+
+==============================
+📥 Suspense and React.lazy()
+==============================
+
+React.lazy:
+- Enables code splitting of components using dynamic import.
+
+const LazyComp = React.lazy(() => import('./MyComponent'));
+
+Suspense:
+- Renders fallback UI until lazy component is loaded.
+
+<Suspense fallback={<div>Loading...</div>}>
+  <LazyComp />
+</Suspense>
+
+⚠️ React 16:
+- Only supports Suspense for code splitting.
+
+⚠️ React 18+:
+- Supports Suspense for data fetching, streaming SSR, etc.
+
+==============================
+🌀 React Portals
+==============================
+
+What is it?
+- Allows rendering a component outside the DOM hierarchy of the parent.
+
+Example:
+<body>
+  <div id="root"></div>
+  <div id="modal-root"></div>
+</body>
+
+ReactDOM.createPortal(child, container);
+
+function Modal({ children }) {
+  return ReactDOM.createPortal(
+    <div className="modal">{children}</div>,
+    document.getElementById('modal-root')
+  );
+}
+
+Usage:
+<Modal>
+  <p>This is rendered via portal</p>
+</Modal>
+
+Use cases:
+- Modals
+- Tooltips
+- Dropdowns
+- Toasts
+
+==============================
+⚖️ React 16 vs React 18
+==============================
+
+Common:
+- Both use Fiber architecture.
+- Both support error boundaries, portals, Suspense for code splitting.
+
+🔹 React 16:
+- Introduced Fiber.
+- Error Boundaries, Fragments, Portals.
+- Suspense for React.lazy() only.
+- No concurrent mode for developers.
+
+🔹 React 18:
+- Unlocks concurrent features using Fiber engine:
+  ✅ startTransition(), useTransition()
+  ✅ useDeferredValue()
+  ✅ Suspense for data
+  ✅ useId()
+  ✅ Automatic batching
+  ✅ Streaming SSR
+- Requires using createRoot() to enable concurrent rendering.
+
+Example:
+import { createRoot } from 'react-dom/client';
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+
+==============================
+📌 TL;DR
+==============================
+
+React Fiber (React 16+):
+- Replaced old reconciliation engine.
+- Enables interruptible, asynchronous rendering.
+- Allows modern features: Suspense, Portals, Concurrent Mode.
+
+React 16:
+- Fiber introduced, but limited feature set exposed.
+
+React 18:
+- Fully unlocks power of Fiber with concurrent rendering, data Suspense, smarter batching, and streaming.

@@ -1,0 +1,115 @@
+Great question! In frontend development, there are several types of web applications based on how they render content, load resources, and handle navigation. Here’s a clear breakdown of the main types:
+
+⚡️ 1. SPA (Single Page Application)
+What it is: Only a single HTML page is loaded. All content updates happen via JavaScript without reloading the page.
+
+Examples: React, Vue, Angular apps.
+
+Pros:
+
+Fast, smooth user experience
+
+No full-page reloads
+
+Cons:
+
+SEO can be tricky
+
+Initial bundle size might be large
+
+🧠 2. MPA (Multi-Page Application)
+What it is: Each page is a separate HTML file; navigation triggers full-page reloads.
+
+Examples: Traditional websites like e-commerce, blogs, or older PHP/Java-based web apps.
+
+Pros:
+
+Great for SEO
+
+Simple to implement
+
+Cons:
+
+Slower navigation due to full page reloads
+
+Shared state between pages is harder
+
+⚙️ 3. SSR (Server-Side Rendering)
+What it is: HTML is rendered on the server and sent to the browser. JavaScript takes over for interactivity (hydration).
+
+Examples: Next.js, Nuxt.js
+
+Pros:
+
+Great for SEO
+
+Fast first load
+
+Cons:
+
+More server resources
+
+More complex infrastructure
+
+🧳 4. SSG (Static Site Generation)
+What it is: HTML is pre-rendered at build time and served statically (like a blog or documentation site).
+
+Examples: Next.js (with getStaticProps), Gatsby, Hugo
+
+Pros:
+
+Super fast
+
+Low server load (can use CDN)
+
+Cons:
+
+Not ideal for dynamic content
+
+Need rebuilds for every content change
+
+🔁 5. ISR (Incremental Static Regeneration)
+What it is: A hybrid of SSG + SSR. Some static pages update in the background at a set interval.
+
+Examples: Next.js (with revalidate in getStaticProps)
+
+Pros:
+
+Great balance between speed and freshness
+
+Cons:
+
+Still tied to framework support (mainly Next.js)
+
+🔌 6. PWA (Progressive Web App)
+What it is: A web app that behaves like a native app (can work offline, be installed, etc.)
+
+Examples: Twitter Lite, Pinterest
+
+Pros:
+
+Works offline
+
+Can be installed on devices
+
+Cons:
+
+Needs proper service worker setup
+
+Not supported fully on iOS (yet)
+
+ Bonus: Micro-Frontend Apps
+What it is: Frontend broken into independently deployable pieces (like microservices for frontend).
+
+Examples: Multiple teams work on parts of a UI like a dashboard
+
+Pros:
+
+Scalable across teams
+
+Independent deployments
+
+Cons:
+
+Complex architecture and communication between pieces
+

@@ -1,0 +1,84 @@
+🔹 TDD (Test-Driven Development)
+✅ Conceptual Questions
+What is Test-Driven Development? Why is it useful?
+TDD is a development process where you write tests before writing the actual implementation. The idea is to start with a failing test (red), write just enough code to make it pass (green), and then refactor while keeping the test green.
+It's useful because it helps clarify requirements early, ensures test coverage by default, and leads to better-designed, more maintainable code.
+
+What are the three steps of TDD (Red-Green-Refactor)? Explain each.
+
+Red: Write a test for a small piece of functionality. It should fail because the feature isn’t implemented yet.
+
+Green: Write the minimum code necessary to make the test pass.
+
+Refactor: Improve the code structure, remove duplication, optimize logic, while ensuring the test still passes.
+
+What’s the difference between TDD and traditional testing?
+Traditional testing is often done after implementation — it validates behavior retroactively.
+TDD drives the design of the system from the beginning. It’s more proactive and leads to smaller, testable units.
+
+What are some benefits and drawbacks of TDD?
+Benefits:
+
+Fewer bugs and regressions
+
+Easier refactoring
+
+Better code design and modularity
+
+Faster feedback during development
+Drawbacks:
+
+Steep learning curve
+
+Slower in the short term
+
+Can be overkill for small throwaway prototypes
+
+What testing libraries do you use in React? Why?
+I primarily use Jest for the test runner and React Testing Library (RTL) for component testing.
+RTL encourages testing from the user's perspective — focusing on what’s rendered, not how. For mocking, I use jest.mock, and for hooks, I sometimes use @testing-library/react-hooks.
+
+How do you test hooks, components, and async operations in TDD?
+
+Hooks: Use renderHook from @testing-library/react-hooks to test custom hooks in isolation.
+
+Components: Use render, screen, and user interactions (userEvent) from RTL.
+
+Async: Use await waitFor() to handle async updates and assertions.
+
+Do you write tests for third-party libraries or mock them? Why?
+I don’t write tests for third-party libraries. Instead, I mock them if needed using jest.mock() or MSW for APIs. The goal is to isolate my code and ensure my logic works correctly, not the dependencies.
+
+
+
+ Practical / Application-Based Questions
+Walk me through a recent example where you applied TDD in a React project.
+In a project with dynamic filters, I started by writing tests that checked how selected filters updated the results list. Initially, the test failed. I implemented the filtering logic, made it pass, and then cleaned up the code. This cycle helped catch edge cases like “selecting the same filter twice” or “clearing all filters”.
+
+How would you test a component that fetches data from an API?
+I mock the API call using jest.mock() or msw. Then I render the component, assert the loading state appears, and use await findByText() to check that the fetched data is rendered correctly. I also test error and empty states.
+
+How do you test conditional rendering in React using TDD?
+I write separate test cases for each condition. For example, if a component shows a banner only when a flag is true, I assert:
+
+That the banner is not in the DOM initially.
+
+That the banner appears when the prop is set.
+
+What kind of tests do you write for a form component (unit, integration, e2e)?
+
+Unit: Validation logic, controlled component behavior
+
+Integration: User typing, form submission, and validation errors using userEvent
+
+E2E: Tools like Cypress or Playwright to simulate real user flow — fill form, submit, check success/error message
+
+What are mocks, stubs, and spies — and when would you use them?
+
+Mocks: Fake versions of real modules or functions (e.g., API calls)
+
+Stubs: Provide pre-programmed responses
+
+Spies: Monitor function calls (like jest.fn())
+I use mocks for APIs, spies to assert if callbacks are called, and stubs for dependency behavior.
+

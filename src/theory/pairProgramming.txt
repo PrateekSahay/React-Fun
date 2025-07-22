@@ -1,0 +1,36 @@
+Pair Programming
+✅ Conceptual Questions
+What is pair programming and what are the different styles?
+Pair programming is a collaborative coding practice where two developers work together on the same code.
+
+Driver-Navigator: One types (driver), the other reviews and thinks strategically (navigator).
+
+Ping-Pong: One writes a test, the other writes the implementation — very useful in TDD.
+
+Strong Style: Driver only types what navigator says — used for mentoring or intense collaboration.
+
+What are the benefits and challenges of pair programming?
+Benefits:
+
+Shared knowledge
+
+Better code quality
+
+Real-time review
+Challenges:
+
+Can be tiring
+
+Requires good communication
+
+Needs alignment in work style and pace
+
+How do you ensure both people stay engaged during a pairing session?
+I switch roles regularly (every 20–30 mins). I ask questions, explain my thought process, and encourage feedback. If I’m navigating, I stay vocal and avoid being passive.
+
+Have you ever had a difficult pairing experience? How did you handle it?
+Yes, I once paired with someone who preferred to work silently and didn’t communicate their decisions. I respectfully paused and suggested we clarify the problem together. We aligned on expectations, and the rest of the session went smoother.
+
+How do you approach pairing with someone who is less/more experienced than you?
+With a less experienced dev, I focus on guiding without taking control — ask leading questions, explain decisions.
+With a more experienced dev, I treat it as a learning opportunity — ask for feedback, observe patterns, and still contribute by thinking out loud and supporting implementation.

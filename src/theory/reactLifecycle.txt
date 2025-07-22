@@ -1,0 +1,115 @@
+===========================
+🧠 React Lifecycle Summary
+===========================
+
+🔹 LIFECYCLE PHASES:
+- Mounting: Component is created & added to DOM
+- Updating: Component is re-rendered due to state/prop change
+- Unmounting: Component is removed from DOM
+
+===========================
+🏛 CLASS COMPONENT LIFECYCLE
+===========================
+
+🔵 Mounting Order:
+1️⃣ constructor()
+2️⃣ static getDerivedStateFromProps(props, state)
+3️⃣ render()
+4️⃣ componentDidMount()         ← ✅ Side effects safe here
+
+🟠 Updating Order:
+1️⃣ static getDerivedStateFromProps()
+2️⃣ shouldComponentUpdate(nextProps, nextState)
+3️⃣ render()
+4️⃣ getSnapshotBeforeUpdate(prevProps, prevState)
+5️⃣ componentDidUpdate(prevProps, prevState, snapshot)
+
+🔴 Unmounting:
+- componentWillUnmount()        ← 🔁 Cleanup: timers, listeners
+
+===============================
+⚛️ FUNCTION COMPONENT LIFECYCLE
+===============================
+
+🔵 Mounting:
+- useEffect(() => {...}, [])           ← ✅ Runs AFTER paint
+- useLayoutEffect(() => {...}, [])     ← 🔴 Runs BEFORE paint (blocks it)
+
+🟠 Updating:
+- useEffect(() => {...}, [deps])       ← After DOM + paint
+- useLayoutEffect(() => {...}, [deps]) ← Before paint
+
+🔴 Unmounting:
+- return cleanup inside useEffect:
+  useEffect(() => {
+    return () => {
+      // cleanup logic
+    };
+  }, []);
+
+===============================
+🎯 DIFFERENCE: useEffect vs useLayoutEffect
+===============================
+
+| Feature          | useEffect         | useLayoutEffect     |
+|------------------|-------------------|----------------------|
+| Timing           | After paint       | Before paint         |
+| Blocking         | ❌ No             | ✅ Yes               |
+| Use case         | API, subscriptions| DOM measurements     |
+
+===============================
+🧪 CLASS vs FUNCTION Comparison
+===============================
+
+| Lifecycle Step     | Class Component           | Function Component         |
+|--------------------|---------------------------|-----------------------------|
+| Mount              | componentDidMount()       | useEffect(() => {}, [])     |
+| Update             | componentDidUpdate()      | useEffect(() => {}, [deps]) |
+| Before Paint       | getSnapshotBeforeUpdate() | useLayoutEffect()           |
+| Unmount            | componentWillUnmount()    | useEffect(() => return ...) |
+| Skip Re-render     | shouldComponentUpdate()   | React.memo / useMemo        |
+
+===============================
+🖼 RENDER ORDER with BROWSER PAINT
+===============================
+
+Typical Mount Order (Function Component):
+
+1️⃣ render() / JSX
+2️⃣ DOM is committed
+3️⃣ useLayoutEffect() runs        ← before paint (blocking)
+4️⃣ 🖌 browser paints UI
+5️⃣ useEffect() runs              ← after paint
+
+Example Code:
+
+function App() {
+  useEffect(() => {
+    console.log('🟢 useEffect');         // after paint
+  }, []);
+
+  useLayoutEffect(() => {
+    console.log('🔴 useLayoutEffect');   // before paint
+  }, []);
+
+  console.log('🧱 render');
+  return <div>Hello</div>;
+}
+
+Console Output:
+🧱 render
+🔴 useLayoutEffect
+🖌 [browser paints]
+🟢 useEffect
+
+===============================
+✅ BEST PRACTICES
+===============================
+
+| Task                   | Use                          |
+|------------------------|------------------------------|
+| API calls              | useEffect / componentDidMount|
+| DOM read/write         | useLayoutEffect              |
+| Cleanup timers/events  | return () => {...} in useEffect |
+| Avoid unnecessary rerenders | React.memo, useMemo     |
+
