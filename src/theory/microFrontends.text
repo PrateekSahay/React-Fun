@@ -1,0 +1,226 @@
+Microfrontends (MFEs) - Complete Summary & Interview Cheat Sheet
+
+---
+
+# 1️⃣ Sharing data between different routes / MFEs
+
+Questions Discussed:
+- How to share data between different routes in the frontend?
+- How to do this in microfrontends?
+- Can we do this using Module Federation?
+
+Key Takeaways:
+- Within a single SPA: Use React Context, Redux, Zustand, or a global store.
+- In Microfrontends: MFEs are independent → cannot share local state directly.
+- Best practice: MFEs talk to the shell (host) for shared state, or communicate via events.
+- Module Federation:
+  - Shell exposes shared state or utility functions.
+  - MFEs import exposed modules at runtime.
+  - MFEs are built independently and deployed independently.
+
+---
+
+# 2️⃣ Why use events in addition to shell-owned state?
+
+Question Discussed:
+- Why use events for cross-MFE communication if shell-owned state can do the same?
+
+Key Takeaways:
+- Shell-owned state → single source of truth; “What is the current value?”
+- Events → signals; “Something just happened” (fire-and-forget, side effects)
+- Use both together:
+  - State for persistent shared data
+  - Events for notifications, actions, decoupled communication
+- Rule of thumb:
+  - “What is it now?” → state
+  - “What just happened?” → event
+
+---
+
+# 3️⃣ What is a shell in MFEs?
+
+Question Discussed:
+- What is a shell?
+
+Key Takeaways:
+- The shell is the host / container / orchestrator.
+- Responsibilities:
+  - Loads HTML and JS bundles
+  - Initializes routing
+  - Manages layout (header/footer)
+  - Holds shared state (auth, theme, feature flags)
+  - Loads MFEs dynamically
+- MFEs are independent; shell is stable and rarely changes
+- Alternative names: host, container, root app, orchestrator
+
+---
+
+# 4️⃣ Browser behavior with MFEs
+
+Questions Discussed:
+- If one MFE is changed and pushed to production, how does it reflect in the browser?
+- Browser loads only one HTML; how does Module Federation work with multiple MFEs?
+
+Key Takeaways:
+- Browser always loads one HTML from the shell
+- Shell JS dynamically loads MFEs via remoteEntry.js (Module Federation)
+- MFEs are JS modules, no separate HTML needed
+- Updating one MFE:
+  - Build and deploy only that MFE
+  - Next page load or refresh fetches the new JS
+  - Shell and other MFEs remain unchanged
+- Lazy-loading MFEs is possible for performance
+
+---
+
+# 5️⃣ Single page with multiple MFEs (“dashboard style”)
+
+Question Discussed:
+- What if one page has 4 MFEs each loaded in a box?
+
+Key Takeaways:
+- Shell still serves the one HTML page
+- Shell mounts MFEs dynamically into boxes / widgets
+- MFEs are loaded via Module Federation (remoteEntry.js)
+- Each MFE is isolated
+- Updates in one MFE can propagate via shell state/events
+- Performance optimization: load MFEs in parallel, lazy-load below-the-fold
+
+---
+
+# 6️⃣ Shared state scenario: editable name
+
+Questions Discussed:
+- MFE 1 has firstName and lastName
+- MFE 2 shows fullName using data from MFE 1
+- MFE 1 is editable → how to implement?
+
+Key Takeaways:
+- Shell-owned state solution (best practice):
+  - Shell exposes personState with get, set, subscribe
+  - MFE 1 updates state
+  - MFE 2 subscribes and renders full name
+  - Updates are immediate → reflected in MFE 2 without refresh
+- Alternative: event + shell state
+- Key principle: MFEs never talk to each other directly
+
+---
+
+# 7️⃣ Building an MFE application
+
+Questions Discussed:
+- How is an MFE built? Do we use npm build?
+
+Key Takeaways:
+- MFEs are independently built applications
+- Use framework build (npm run build, vite build, etc.)
+- Output:
+  - remoteEntry.js (Module Federation entry point)
+  - JS bundles
+  - Assets (CSS, images)
+- MFEs do not generate HTML — shell provides it
+- Deployment:
+  - Upload MFE bundle to CDN / server
+  - Shell loads dynamically via Module Federation URLs
+- Module Federation config example provided
+
+---
+
+# 8️⃣ Build + deploy flow for shell + multiple MFEs
+
+Scenario Discussed:
+- Shell + 4 MFEs on one page
+
+Build-time:
+- Each repo builds independently
+- Deploy each to separate URLs
+
+Runtime:
+1. Browser loads shell HTML
+2. Shell JS boots
+3. Shell dynamically imports all MFEs
+4. MFEs mount into boxes
+5. Updates propagate via shell state/events
+6. Updating a single MFE requires only redeploying that MFE
+
+---
+
+# 9️⃣ Routing in Microfrontends
+
+Questions Discussed:
+- How to handle routing in microfrontends?
+
+Key Takeaways:
+
+### Shell-owned routing (recommended)
+- Shell controls top-level URLs
+- MFEs can handle internal sub-routes
+- Example: /orders → MFE Orders; /profile → MFE Profile
+- Shell handles dynamic imports and mounts MFEs
+- Example with React Router provided
+
+### MFE-internal routing
+- MFEs handle sub-routes internally
+- Shell mounts MFE at top-level route
+- Example: Orders MFE handles /orders/list, /orders/:id
+- Requires nested routing or URL prefix awareness
+
+### Avoid conflicts
+- Use unique route prefixes (e.g., /orders/*)
+- Use basename in routing libraries
+- Shell handles main navigation; MFEs handle internal pages
+
+Summary Flow:
+URL: /orders/123 → Shell mounts Orders MFE → Orders MFE handles /123
+Browser still loads only one HTML (shell)
+
+---
+
+# 10️⃣ Key Microfrontend Principles / Best Practices
+
+- Single source of truth → shell-owned state
+- Loose coupling → MFEs communicate via events or shell API
+- Independent deployability → each MFE deploys separately
+- No direct imports between MFEs → use Module Federation
+- Shell is stable → rarely updated
+- Shared dependencies → singleton libraries (React, ReactDOM)
+- Lazy loading → optimize performance
+- Route prefixes / basenames prevent URL conflicts
+- MFEs never assume they are at root /
+
+---
+
+# 11️⃣ Potential Interview Questions / Scenarios
+
+1. How can two MFEs share data on the same page?
+2. Why use events when shell state can also be shared?
+3. What is the role of the shell in microfrontends?
+4. How does Module Federation allow independent deployment of MFEs?
+5. What happens in the browser when an MFE is updated?
+6. How do you handle multiple MFEs on a single page?
+7. How do MFEs communicate with each other without direct imports?
+8. How is an MFE built and deployed?
+9. How do you ensure shared libraries (React, Redux) are not duplicated?
+10. How do you persist shared state across page reloads or multiple tabs?
+11. How do you avoid infinite update loops when multiple MFEs update shared state?
+12. How would you implement a dashboard where one widget updates data and another shows it in real time?
+13. How can lazy loading be applied to MFEs for performance optimization?
+14. How does the shell handle routing if different MFEs have their own routes?
+
+---
+
+# 12️⃣ Key Patterns for Real Projects
+
+- Shell-owned state → for persistent, shared data (auth, user, theme)
+- Event-based communication → for one-off signals or side effects
+- URL-driven data → for decoupled routing
+- Shared library contracts → type definitions, interfaces
+- Dynamic MFE loading → via Module Federation (remoteEntry.js)
+- Independent CI/CD pipelines → each MFE builds and deploys separately
+- Lazy-load MFEs → for better performance on large pages
+
+---
+
+# ✅ One-liner Summary
+
+Microfrontends are independent, deployable frontend apps orchestrated by a shell; they communicate via shell-owned state, events, or shared contracts, and are dynamically loaded at runtime using Module Federation.
